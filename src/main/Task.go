@@ -21,7 +21,7 @@ func (dt DateTime) String() string {
 func (dt DateTime) MarshalJSON() ([]byte, error) {
 	return json.Marshal(dt.String())
 }
-func (dt DateTime) UnmarshalJSON(b []byte) error {
+func (dt *DateTime) UnmarshalJSON(b []byte) error {
 	var s string
 	err := json.Unmarshal(b, &s)
 	if err != nil {
