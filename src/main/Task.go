@@ -12,13 +12,13 @@ type DateTime struct {
 	time time.Time
 }
 
-func (dt DateTime) format() string {
+func (dt *DateTime) format() string {
 	return time.RFC3339
 }
-func (dt DateTime) String() string {
+func (dt *DateTime) String() string {
 	return dt.time.Format(dt.format())
 }
-func (dt DateTime) MarshalJSON() ([]byte, error) {
+func (dt *DateTime) MarshalJSON() ([]byte, error) {
 	return json.Marshal(dt.String())
 }
 func (dt *DateTime) UnmarshalJSON(b []byte) error {

@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-var taskFile string = "tasks.json"
+var taskFile = "tasks.json"
 
 func main() {
 	var tasks = loadTasks()
