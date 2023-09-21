@@ -43,20 +43,20 @@ func main() {
 	}
 }
 
-func deleteTask(text string, reader *bufio.Reader, tasks []Task) {
-	fmt.Println("Which task to delete? Id:")
+func createTask(text string, reader *bufio.Reader, tasks []Task) (string, []Task) {
+	fmt.Println("Enter name of task:")
 	fmt.Print("-> ")
 	text, _ = reader.ReadString('\n')
 	text = cleanString(text)
-	id, err := strconv.ParseUint(text, 10, 64)
-	check(err)
-	for i, task := range tasks {
-		if task.Id == id {
-			tasks = remove(tasks, i)
-			fmt.Println("deleted task with id " + strconv.FormatUint(id, 10))
-			break
-		}
+	t := Task{
+		Id:          getHighestId(tasks) + 1,
+		Content:     text,
+		DateCreated: DateTime{time.Now()},
+		Completed:   false,
 	}
+	tasks = append(tasks, t)
+	fmt.Println("Task created")
+	return text, tasks
 }
 
 func toggleCompletion(text string, reader *bufio.Reader, tasks []Task) string {
@@ -77,22 +77,23 @@ func toggleCompletion(text string, reader *bufio.Reader, tasks []Task) string {
 	return text
 }
 
-func createTask(text string, reader *bufio.Reader, tasks []Task) (string, []Task) {
-	fmt.Println("Enter name of task:")
+func deleteTask(text string, reader *bufio.Reader, tasks []Task) {
+	fmt.Println("Which task to delete? Id:")
 	fmt.Print("-> ")
 	text, _ = reader.ReadString('\n')
 	text = cleanString(text)
-	t := Task{
-		Id:          getHighestId(tasks) + 1,
-		Content:     text,
-		DateCreated: DateTime{time.Now()},
-		Completed:   false,
+	id, err := strconv.ParseUint(text, 10, 64)
+	check(err)
+	for i, task := range tasks {
+		if task.Id == id {
+			tasks = remove(tasks, i)
+			fmt.Println("deleted task with id " + strconv.FormatUint(id, 10))
+			break
+		}
 	}
-	tasks = append(tasks, t)
-	fmt.Println("Task created")
-	return text, tasks
 }
 
+// helper functions
 func remove(tasks []Task, i int) []Task {
 	tasks[i] = tasks[len(tasks)-1]
 	return tasks[:len(tasks)-1]
