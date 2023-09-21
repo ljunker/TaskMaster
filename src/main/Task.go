@@ -42,8 +42,13 @@ type Task struct {
 	Id          uint64
 	Content     string
 	DateCreated DateTime
+	Completed   bool
 }
 
 func (t Task) String() string {
-	return fmt.Sprintf("%d - %s - %s", t.Id, t.Content, t.DateCreated.String())
+	done := "done"
+	if !t.Completed {
+		done = "not done"
+	}
+	return fmt.Sprintf("%d - %s - %s - %s", t.Id, t.Content, t.DateCreated.String(), done)
 }

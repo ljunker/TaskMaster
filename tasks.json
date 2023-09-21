@@ -1,1 +1,1 @@
-[{"Id":0,"Content":"Test","DateCreated":"2023-09-20T13:59:43+02:00"}]
+[{"Id":0,"Content":"Test","DateCreated":"2023-09-20T13:59:43+02:00","Completed":true},{"Id":2,"Content":"This is another task","DateCreated":"2023-09-21T15:33:45+02:00","Completed":false}]
